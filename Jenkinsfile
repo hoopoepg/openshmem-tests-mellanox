@@ -36,7 +36,7 @@ tasks["task_2"] = {
     }
     stage ("Building with ICC"){
       sh '''
-        module load hpcx-icc
+        module load intel/ics
         export SHMEM_HOME=$OMPI_HOME
         export CC=''
         cd verifier
