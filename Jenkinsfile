@@ -43,16 +43,20 @@ tasks["task_2"] = {
         ./autogen.sh
         ./configure --prefix=$PWD/install
         make -j9
+        pwd; # DEBUG
         make -j9 install
+        pwd; # DEBUG
         module list ; # DEBUG
         hostname ;  # DEBUG
       '''
     }
     stage ("Run test with ICC"){
       sh '''
+        pwd; # DEBUG
         module list ; # DEBUG
         hostname ;  # DEBUG
         module load hpcx-icc
+        cd $WORKSPACE
         verifier/install/bin/oshmem_test exec --no-colour --task=basic
       '''
     }
