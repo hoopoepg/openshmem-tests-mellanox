@@ -6,14 +6,16 @@ tasks["task_1"] = {
       checkout scm
     }
     stage ("Building with GCC"){
-      sh "module load hpcx-gcc"
-      sh "export SHMEM_HOME=$OMPI_HOME"
-      sh "export CC=''"
-      sh "cd verifier"
-      sh "./autogen.sh"
-      sh "./configure --prefix=$PWD/install"
-      sh "make -j9"
-      sh "make -j9 install"
+      sh '''
+        module load hpcx-gcc
+        export SHMEM_HOME=$OMPI_HOME
+        export CC=''
+        cd verifier
+        ./autogen.sh
+        ./configure --prefix=$PWD/install
+        make -j9
+        make -j9 install
+      '''
     }
     stage ("Run test with GCC"){
       sh "verifier/install/bin/oshmem_test exec --no-colour --task=basic"
@@ -26,14 +28,16 @@ tasks["task_2"] = {
       checkout scm
     }
     stage ("Building with ICC"){
-      sh "module load hpcx-icc"
-      sh "export SHMEM_HOME=$OMPI_HOME"
-      sh "export CC=''"
-      sh "cd verifier"
-      sh "./autogen.sh"
-      sh "./configure --prefix=$PWD/install"
-      sh "make -j9"
-      sh "make -j9 install"
+      sh '''
+        module load hpcx-icc
+        export SHMEM_HOME=$OMPI_HOME
+        export CC=''
+        cd verifier
+        ./autogen.sh
+        ./configure --prefix=$PWD/install
+        make -j9
+        make -j9 install
+      '''
     }
     stage ("Run test with ICC"){
       sh "verifier/install/bin/oshmem_test exec --no-colour --task=basic"
