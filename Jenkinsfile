@@ -16,11 +16,14 @@ tasks["task_1"] = {
         make -j9
         make -j9 install
         module list ; # DEBUG
+        hostname ;  # DEBUG
       '''
     }
     stage ("Run test with GCC"){
       sh '''
         module list ; # DEBUG
+        hostname ;  # DEBUG
+        module load hpcx-gcc
         verifier/install/bin/oshmem_test exec --no-colour --task=basic
       '''
     }
@@ -42,12 +45,15 @@ tasks["task_2"] = {
         make -j9
         make -j9 install
         module list ; # DEBUG
+        hostname ;  # DEBUG
       '''
     }
     stage ("Run test with ICC"){
       sh '''
-        verifier/install/bin/oshmem_test exec --no-colour --task=basic
         module list ; # DEBUG
+        hostname ;  # DEBUG
+        module load hpcx-icc
+        verifier/install/bin/oshmem_test exec --no-colour --task=basic
       '''
     }
   }
