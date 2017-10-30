@@ -15,10 +15,14 @@ tasks["task_1"] = {
         ./configure --prefix=$PWD/install
         make -j9
         make -j9 install
+        module list ; # DEBUG
       '''
     }
     stage ("Run test with GCC"){
-      sh "verifier/install/bin/oshmem_test exec --no-colour --task=basic"
+      sh '''
+        module list ; # DEBUG
+        verifier/install/bin/oshmem_test exec --no-colour --task=basic
+      '''
     }
   }
 }
@@ -37,10 +41,14 @@ tasks["task_2"] = {
         ./configure --prefix=$PWD/install
         make -j9
         make -j9 install
+        module list ; # DEBUG
       '''
     }
     stage ("Run test with ICC"){
-      sh "verifier/install/bin/oshmem_test exec --no-colour --task=basic"
+      sh '''
+        verifier/install/bin/oshmem_test exec --no-colour --task=basic
+        module list ; # DEBUG
+      '''
     }
   }
 }
