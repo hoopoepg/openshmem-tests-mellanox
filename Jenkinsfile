@@ -55,7 +55,7 @@ tasks["task_2"] = {
         pwd; # DEBUG
         module list ; # DEBUG
         hostname ;  # DEBUG
-        module load hpcx-icc
+        module load intel/ics hpcx-icc
         cd $WORKSPACE
         verifier/install/bin/oshmem_test exec --no-colour --task=basic
       '''
