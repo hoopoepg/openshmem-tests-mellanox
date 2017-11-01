@@ -1,34 +1,6 @@
+def nodeList = ["hpc-test-node", "hpc-test-node3"]
 def tasks = [:]
 
-tasks["task_1"] = {
-  node('hpc-test-node') {
-    stage ("SCM checkout"){    
-      checkout scm
-    }
-    stage ("Building with GCC"){
-      sh '''
-        module load hpcx-gcc
-        export SHMEM_HOME=$OMPI_HOME
-        export CC=''
-        cd verifier
-        ./autogen.sh
-        ./configure --prefix=$PWD/install
-        make -j9
-        make -j9 install
-        module list ; # DEBUG
-        hostname ;  # DEBUG
-      '''
-    }
-    stage ("Run test with GCC"){
-      sh '''
-        module list ; # DEBUG
-        hostname ;  # DEBUG
-        module load hpcx-gcc
-        verifier/install/bin/oshmem_test exec --no-colour --task=basic
-      '''
-    }
-  }
-}
 tasks["task_2"] = {
   node('hpc-test-node2') {
     stage ("SCM checkout"){    
@@ -62,5 +34,37 @@ tasks["task_2"] = {
     }
   }
 }
-
+def j=2
+for (single_node in nodeList) {
+  tasks["task_${j}"] = {
+    node("${single_node}") {
+      stage ("SCM checkout on ${single_node}"){    
+        checkout scm
+      }
+      stage ("Building with GCC on ${single_node}"){
+        sh '''
+          module load hpcx-gcc
+          export SHMEM_HOME=$OMPI_HOME
+          export CC=''
+          cd verifier
+          ./autogen.sh
+          ./configure --prefix=$PWD/install
+          make -j9
+          make -j9 install
+          module list ; # DEBUG
+          hostname ;  # DEBUG
+        '''
+      }
+      stage ("Run test with GCC on ${single_node}"){
+        sh '''
+          module list ; # DEBUG
+          hostname ;  # DEBUG
+          module load hpcx-gcc
+          verifier/install/bin/oshmem_test exec --no-colour --task=basic
+        '''
+      }
+    }
+  }
+  j++
+}
 parallel tasks
