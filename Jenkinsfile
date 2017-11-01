@@ -1,4 +1,4 @@
-def nodeList = ["hpc-test-node", "hpc-test-node3"]
+def nodeList = ["hpc-test-node", "hpc-test-node3","hpc-test-node2"]
 def tasks = [:]
 
 tasks["task_ICC"] = {
