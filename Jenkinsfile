@@ -1,7 +1,7 @@
 def nodeList = ["hpc-test-node", "hpc-test-node3"]
 def tasks = [:]
 
-tasks["task_2"] = {
+tasks["task_ICC"] = {
   node('hpc-test-node2') {
     stage ("SCM checkout"){    
       checkout scm
@@ -35,13 +35,13 @@ tasks["task_2"] = {
   }
 }
 def j=2
-for (single_node in nodeList) {
-  tasks["task_${j}"] = {
-    node("${single_node}") {
-      stage ("SCM checkout on ${single_node}"){    
+nodeList.each {
+  tasks["task_GCC_${it}"] = {
+    node("${it}") {
+      stage ("SCM checkout on ${it}"){    
         checkout scm
       }
-      stage ("Building with GCC on ${single_node}"){
+      stage ("Building with GCC on ${it}"){
         sh '''
           module load hpcx-gcc
           export SHMEM_HOME=$OMPI_HOME
@@ -55,7 +55,7 @@ for (single_node in nodeList) {
           hostname ;  # DEBUG
         '''
       }
-      stage ("Run test with GCC on ${single_node}"){
+      stage ("Run test with GCC on ${it}"){
         sh '''
           module list ; # DEBUG
           hostname ;  # DEBUG
