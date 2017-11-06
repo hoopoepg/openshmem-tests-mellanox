@@ -14,3 +14,5 @@ tasks["task_ICC"] = {
     }
   }
 }
+
+parallel tasks
