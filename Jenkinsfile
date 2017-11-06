@@ -1,3 +1,5 @@
+def tasks = [:]
+
 tasks["task_ICC"] = {
   node('hpc-test-node2') {
     stage ("SCM checkout") {    
