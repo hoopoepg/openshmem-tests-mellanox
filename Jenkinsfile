@@ -1,6 +1,6 @@
-def tasks = [:]
+def pl_tasks = [:]
 
-tasks["task_ICC"] = {
+pl_tasks["task_ICC"] = {
   node('hpc-test-node2') {
     stage ("SCM checkout") {    
       sh 'echo "==================== SCM start ===================="'
@@ -17,4 +17,4 @@ tasks["task_ICC"] = {
   }
 }
 
-parallel tasks
+parallel pl_tasks
