@@ -5,15 +5,15 @@ pl_tasks["task_ICC"] = {
     stage ("SCM checkout") {    
       sh 'echo "==================== SCM start ===================="'
       checkout scm
-      sh 'sleep 300'
       sh 'echo "==================== SCM end ===================="'
     }
     stage ("Secondary_SCM") {
       sh 'echo "==================== Secondary_SCM ===================="'
       dir('swx_ci') {
         git url: 'https://github.com/MrBr-github/groovy-test.git'
-      sh 'echo "==================== Pipeline END ===================="'
       }
+      
+      sh 'echo "==================== Pipeline END ===================="'
     }
   }
 }
