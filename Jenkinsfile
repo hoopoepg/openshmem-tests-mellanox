@@ -12,7 +12,13 @@ pl_tasks["task_ICC"] = {
       dir('swx_ci') {
         git url: 'https://github.com/MrBr-github/groovy-test.git'
       }
-      
+      sh 'echo "==================== Secondary_SCM END ===================="'
+    }
+    stage ("Run external script") {
+      sh 'echo "==================== Run external script ===================="'
+      sh 'echo "==================== Run external script  END ===================="'
+    }
+    stage ("End") {
       sh 'echo "==================== Pipeline END ===================="'
     }
   }
