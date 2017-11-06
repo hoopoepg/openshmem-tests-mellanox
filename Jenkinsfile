@@ -10,7 +10,7 @@ pl_tasks["task_ICC"] = {
     }
     stage ("Secondary_SCM") {
       sh 'echo "==================== Secondary_SCM ===================="'
-      dir('') {
+      dir('swx_ci') {
         git url: 'https://github.com/MrBr-github/groovy-test.git'
       sh 'echo "==================== Pipeline END ===================="'
       }
