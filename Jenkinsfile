@@ -5,6 +5,7 @@ pl_tasks["task_ICC"] = {
     stage ("SCM checkout") {    
       sh 'echo "==================== SCM start ===================="'
       checkout scm
+      sh 'sleep 300'
       sh 'echo "==================== SCM end ===================="'
     }
     stage ("Secondary_SCM") {
