@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 def nodeList = ["hpc-test-node", "hpc-test-node3","hpc-test-node2"]
 def tasks = [:]
 
