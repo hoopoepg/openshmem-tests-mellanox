@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 def pl_tasks = [:]
 
 pl_tasks["task_ICC"] = {
