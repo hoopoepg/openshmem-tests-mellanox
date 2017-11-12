@@ -2,6 +2,7 @@
 
 node('master') {
    deleteDir()
+   scm checkout
    dir('swx_ci') {
       checkout([$class: 'GitSCM', 
               extensions: [[$class: 'CloneOption',  shallow: true]], 
