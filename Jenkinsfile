@@ -1,5 +1,4 @@
 #!/usr/bin/env groovy
-sh 'echo "======1=====";pwd; ls -la ' ; //DEBUG
 
 node('master') {
   sh 'echo "======2=====";ls -la ' ; //DEBUG
