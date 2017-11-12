@@ -1,10 +1,12 @@
 #!/usr/bin/env groovy
 
 node('master') {
-  sh 'echo "======2=====";ls -la ' ; //DEBUG
-  dir('swx_ci') {
-    git url: 'https://github.com/MrBr-github/swx_ci.git'
-  }
-  sh 'echo "======3=====";ls -la ' ; //DEBUG
+   dir('swx_ci') {
+    deleteDir()
+    checkout([$class: 'GitSCM', 
+              extensions: [[$class: 'CloneOption',  shallow: true]], 
+              userRemoteConfigs: [[ url: 'https://github.com/MrBr-github/swx_ci.git']]
+            ])
+   }
   evaluate(readFile("${env.WORKSPACE}/swx_ci/_test_pipeline/tests.groovy"))
 }
